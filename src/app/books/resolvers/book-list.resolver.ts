@@ -7,5 +7,5 @@ export const bookListResolver: ResolveFn<Book[]> = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot,
 ) => {
-  return inject(BooksService).getAllBooks();
+  return inject(BooksService).getAllBooks(route.queryParams["search"]);
 };

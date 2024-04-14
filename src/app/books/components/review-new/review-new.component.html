@@ -1,0 +1,45 @@
+<article class="m-3">
+  <h2>Create review for book:</h2>
+  <section class="d-flex flex-column gap-2">
+    <div class="card-body">
+      <h5 class="card-title">{{ book.title }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{ book.author }}</h6>
+    </div>
+  </section>
+</article>
+<div>
+  <form (ngSubmit)="onSubmit()" #bookEdit="ngForm">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" id="title"
+             required maxlength="50"
+             [(ngModel)]="review.title" name="title" #title="ngModel">
+      <div [hidden]="title.valid || title.pristine"
+           class="alert alert-danger">
+        Title is required. Max length 50.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="rate">Rate</label>
+      <input type="number" class="form-control" id="rate"
+             required min="0" max="10"
+             [(ngModel)]="review.rate" name="rate" #rate="ngModel">
+      <div [hidden]="rate.valid || rate.pristine"
+           class="alert alert-danger">
+        Rate must be between 0 and 10.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea type="text" class="form-control" id="description"
+                maxlength="1000"
+                [(ngModel)]="review.description" name="description" #description="ngModel"></textarea>
+      <div [hidden]="description.valid || description.pristine"
+           class="alert alert-danger">
+        Description must be less than 1000.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success" [disabled]="!bookEdit.form.valid">Save</button>
+    <a routerLink="../.." type="button" class="btn btn-primary">Cancel</a>
+  </form>
+</div>
